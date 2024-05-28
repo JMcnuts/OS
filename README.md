@@ -1,4 +1,5 @@
 # OS (Focuss on persistence).
+```
 
 ### 10.50.26.35 (IP for number 71) 
 ### 10.50.22.197:8000 (Website for challenges)
@@ -7,7 +8,9 @@
 ### credentials 1,3,4 andy.dwyer-BurtMacklinFBI (SSH-Connection)
 ### credentials 5 student-password
 ### credentials 6 garviel-luna
-### credentials 7 bombadil-jolly 
+### credentials 7 bombadil-jolly
+
+```
 ```
 ## Pwershell profiles are good to set persistence. Profiles are just scripts that have configurations set.
 
