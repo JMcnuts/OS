@@ -11,6 +11,7 @@ credentials 6 garviel-luna
 credentials 7 bombadil-jolly
 
 ```
+# POWERSHELL
 ## Pwershell profiles are good to set persistence. Profiles are just scripts that have configurations set.
 ```
 PowerShell supports several profile files and host programs, like Windows, support their own specific profiles. The profiles below are listed in order of precedence with the first profile having the highest precedence.
