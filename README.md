@@ -61,6 +61,23 @@ do { $a--
 get-content 'words.txt' | select-string -pattern az | measure-object -line
 ```
 
+## To find the Security Identifier (SID) of users using PowerShell, you can execute the following command:
+```
+
+Get-WmiObject Win32_UserAccount | Select-Object Name, SID
+
+```
+This command will list all user accounts on your system along with their corresponding SIDs1. If you want to find the SID of a specific user, replace 'username' with the actual username in the command:
+
+```
+Get-WmiObject -Class Win32_UserAccount | Where-Object { $_.Name -eq 'username' } | Select-Object SID
+```
+
+Additionally, if you’re interested in counting the number of users belonging to an Active Directory group, you can use the following PowerShell command:
+```
+Import-Module ActiveDirectory
+(Get-ADGroupMember -Identity "domain users").Count
+```
  
 
 
