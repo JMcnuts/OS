@@ -78,8 +78,16 @@ Additionally, if you’re interested in counting the number of users belonging t
 Import-Module ActiveDirectory
 (Get-ADGroupMember -Identity "domain users").Count
 ```
+ You create a registry key to establish persistence, to set an accion based on automatization.
  
-
+Creating Registry objects with Powershell
+```
+New-Item - Creates a new sub key associated within a hive
+```
+```
+New-Item "HKLM:\Software\Microsoft\Office\14.0\Security\Trusted Documents\TrustRecords" -Force
+```
+Creates a new sub key in Trusted Documents for document.doc
 
 
 
