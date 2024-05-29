@@ -128,7 +128,7 @@ Navigate to "Virus & threat protection."
 Under "Virus & threat protection settings," click "Manage settings."
 Finally, toggle off "Real-Time protection." These steps will help you turn off real-time protection using the Windows Security interface.
 
-
-
-
-
+Wireless network connections (suspicious)
+```
+Get-ChildItem 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles'
+```
