@@ -118,7 +118,15 @@ Set-ItemProperty - Change the value of a sub key
 ```
 Set-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run -Name Test -Value Bacon.exe
 ```
-
+Disable Windows Defender Real Time Protection
+```
+Set-MpPreference -DisableRealtimeMonitoring $TRUE
+```
+Sometimes, the previous command may not work as expected. In such cases, you can follow these steps:
+Click the Windows button in the lower-left corner of your desktop.
+Navigate to "Virus & threat protection."
+Under "Virus & threat protection settings," click "Manage settings."
+Finally, toggle off "Real-Time protection." These steps will help you turn off real-time protection using the Windows Security interface.
 
 
 
