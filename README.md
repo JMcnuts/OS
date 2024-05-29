@@ -88,6 +88,38 @@ New-Item - Creates a new sub key associated within a hive
 New-Item "HKLM:\Software\Microsoft\Office\14.0\Security\Trusted Documents\TrustRecords" -Force
 ```
 Creates a new sub key in Trusted Documents for document.doc
+```
+New-ItemProperty "HKLM:\Software\Microsoft\Office\14.0\Security\Trusted Documents\TrustRecords" -Name "%USERPROFILE%Downloads/test-document.doc" -PropertyType Binary -Value ([byte[]](0x30,0x31,0xFF)) 
+```
+```
+New-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run -Name Test -PropertyType String -Value C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe 
+```
+Creates a new value in the \TrustRecords key
+Creates a value in the \Run key
+Outside of the scope of the class but in case you want to know more about that byte array
+
+
+Modifying Registry objects with PowerShell
+```
+Rename-ItemProperty - Modifies a value associated with a sub key
+```
+```
+Rename-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run -Name SecurityHealth -NewName Test
+```
+```
+Remove-ItemProperty - Removes a value associated with a sub key
+```
+```
+Remove-ItemProperty -Path "HKLM:\Software\Microsoft\Office\14.0\Security\Trusted Documents\TrustRecords" -Name "%USERPROFILE%Downloads/test-document.doc"
+```
+```
+Set-ItemProperty - Change the value of a sub key
+```
+```
+Set-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run -Name Test -Value Bacon.exe
+```
+
+
 
 
 
