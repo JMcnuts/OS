@@ -132,3 +132,23 @@ Wireless network connections (suspicious)
 ```
 Get-ChildItem 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles'
 ```
+# LINUX/UNIX
+
+Without chmoding a dir if we have w and r permissions we can ls -lisa the dir to see what contents are inside the dir.
+
+## Sticky bit.
+Only the owner of that file can delete that file.
+If on the user part of the permisions there is an s that indicates that you are going to run that program as the only user for that program.
+When an executable is ran in Linux, it runs with the permissions of the user who started it. However, SUID and SGID change that to force the executable to run as the owning user or group. These permissions are represented as s in the User or Group field of ls- l.
+
+## Grep:
+```
+ls -Rlisa /etc | grep password 
+```
+1137 4 -rw-r--r--   1 root root 1440 Jan 31  2020 common-password
+1156 4 -rw-r--r--   1 root root 1160 Oct  9  2018 gdm-password
+```
+grep -R 'network' /etc/ 
+```
+Execute grep -R 'network' /etc/ then send it’s standard out to grep to filter for the string network.
+The -R is recursive.
