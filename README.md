@@ -152,3 +152,23 @@ grep -R 'network' /etc/
 ```
 Execute grep -R 'network' /etc/ then send it’s standard out to grep to filter for the string network.
 The -R is recursive.
+
+
+
+## Linux Boot Process:
+
+The file /home/bombadil/mbroken is a copy of an MBR from another machine.
+
+Hash the first partition of the file using md5sum. The flag is the hash.
+
+```
+dd if=/home/bombadil/mbroken bs=1  count=446 | md5sum  #bs=byte syze, count=number of bits to take 
+```
+
+-The file /home/bombadil/mbroken is a copy of an MBR from another machine.
+You will find the "word" GRUB in the output, hash using md5sum.
+The flag is the entire hash.
+
+```
+dd if=/home/bombadil/mbroken bs=1 skip=392 count=4| md5sum #skip= number of bytes to skip
+```
