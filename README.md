@@ -134,6 +134,33 @@ Get-ChildItem 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Pr
 ```
 # LINUX/UNIX
 
+Linux
+SYSV (look for scripts)
+/lib/systemd/systemd or /sbin/init
+
+/etc/init, /etc/inittab, /etc/rc*.d (* is run level) (SYSV)ls -l (/etc/rc3.d/)
+
+SYSD (look for wants and requires)
+ls -lisa /lib/systemd/system/default.target (SYSD)
+
+/etc/systemd/system/*
+
+/lib/systemd/system/*
+
+/run/systemd/generator/*
+
+cat /etc/systemd/system/display-manager.service | tail -n 13
+
+cat /etc/environment
+
+cat /etc/profile
+
+cat /etc/profile.d (look for scripts [.sh])
+
+cat /etc/bash.bashrc
+
+$HOME/.bash_profile and $HOME/.bashrc
+
 Without chmoding a dir if we have w and r permissions we can ls -lisa the dir to see what contents are inside the dir.
 
 ## Sticky bit.
