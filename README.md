@@ -172,3 +172,291 @@ The flag is the entire hash.
 ```
 dd if=/home/bombadil/mbroken bs=1 skip=392 count=4| md5sum #skip= number of bytes to skip
 ```
+
+## Windows Process Validity FG
+
+
+What is a process?
+
+A program running on your computer, whether executed by the user or running in the background.
+
+Examples include:
+
+Background tasks like spell checker
+
+Executables like Google Chrome and Notepad
+
+
+
+What is a DLL?
+
+Dynamic Link Library
+
+A non-standalone program that can be run by (linked to) multiple programs at the same time.
+
+Cannot be directly executed. Dependent on an exe to use as an entry point, such as RUNDLL.EXE (a process that calls on the functionality of the DLL)
+
+Allows developers to make minor changes without affecting other parts of the program.
+
+Some Examples Include:
+
+Comdlg32 - Performs common dialog box related functions.
+
+Device drivers
+
+ActiveX Controls
+
+
+
+
+## View all Processes, not sorted.
+```
+Get-Process
+```
+
+## View all Processes, sort them by PID.
+```
+Get-Process | Sort -Property Id | more
+```
+## View only the processes I define and sort by PID
+```
+Get-Process SMSS,CSRSS,LSASS | Sort -Property Id
+```
+
+## View modules/DLLs used by defined process and their file locations.
+
+```
+Get-Process chrome | foreach {$_.modules} | more
+```
+```
+Get-Process -Name "*chrome*" | Select-Object -ExpandProperty Modules | more
+```
+## View only modules/DLLs used by Chrome with "chrome" in the name and their file locations.
+```
+Get-Process chrome | foreach {$_.modules} | Where-Object ModuleName -like '*chrome*' | more
+```
+```
+Get-Process -Name "*chrome*" | Select-Object -ExpandProperty Modules | Where-Object ModuleName -like '*chrome*' | more
+```
+Pipe in a ft -wrap to see full file name/path.
+
+#PS C:\Users\student> Get-Process chrome | foreach {$_.modules} | Where-Object ModuleName -like '\*chrome*' | more
+
+## Use the Get-Ciminstance Win32_Process cmdlet to veiw processes with PPID
+
+### View Process instances with Win32 process.
+```
+Get-Ciminstance Win32_Process
+```
+### View the additional Properties with Get-Member
+
+#C:\WINDOWS\system32>  Get-CimInstance Win32_Process | Get-Member
+
+### View the processes with PID and PPID sorted by PID
+
+#C:\WINDOWS\system32>  Get-CimInstance Win32_Process | select name,ProcessId,ParentProcessId | sort processid
+
+### View an instance of all Win32 (system) services.
+```
+Get-Ciminstance Win32_service | Select Name, Processid, Pathname | more
+```
+Pipe in ft -wrap to see full file name/path
+
+#PS C:\Users\student> Get-Ciminstance Win32_service | Select Name, Processid, Pathname | ft -wrap | more
+
+View all processes
+```
+tasklist
+```
+#C:\Users\student> tasklist | more
+
+### Display verbose task information in the output
+```
+tasklist /v
+```
+#C:\Users\student> tasklist /v | more
+
+### Display service information for each process without truncation
+```
+tasklist /svc
+```
+#C:\Users\student> tasklist /svc
+
+### Display modules/dlls associated to all processes.
+```
+tasklist /m | more
+```
+#C:\Users\student> tasklist /m | more
+
+### Display modules/dlls associated to a specific process.
+```
+tasklist /m /fi "IMAGENAME eq chrome.exe"
+```
+#C:\Users\student> tasklist /m /fi "IMAGENAME eq chrome.exe" | more
+
+### Formating options
+```
+tasklist /fo:{table|list|csv}`
+```
+#C:\Users\student> tasklist /fo:table | more
+
+#C:\Users\student> tasklist /fo:list | more
+
+#C:\Users\student> tasklist /fo:csv | more
+
+### Filtering for specific string/process
+```
+tasklist /fi "IMAGENAME eq lsass.exe"
+```
+#C:\Users\student>tasklist /fi "IMAGENAME eq lsass.exe
+
+## View Processes in the GUI
+Task Manager
+
+Microsoft Default
+
+Procexp.exe
+
+We’ll go over it in Sysinternal Tools Lesson
+
+How to View Services
+
+
+Q: Which Windows commands let us view information on services?
+
+In Powershell:
+```
+Get-Ciminstance #Microsoft Reference
+```
+```
+Get-Service #Microsoft Reference
+```
+In Command Prompt:
+```
+net start #Shows currently running services
+```
+```
+sc query #Microsoft Reference
+```
+### View only system services and display Name, PID, and the path they are initiated from.
+```
+Get-Ciminstance Win32_service | Select Name, Processid, Pathname | more
+```
+Pipe in a ft -wrap to see full pathname.
+
+#PS C:\Users\student> Get-Ciminstance Win32_service | Select Name, Processid, Pathname | more
+
+### View all services.
+```
+Get-service
+```
+#PS C:\Users\student> get-service | more
+
+### View a defined service, showing all properties in list format.
+```
+get-service ALG | format-list *
+```
+#PS C:\Users\student> get-service ALG | format-list *
+
+### View only currently running services.
+```
+Get-Service | Where-Object {$_.Status -eq "Running"}
+```
+#PS C:\Users\student> Get-Service | Where-Object {$_.Status -eq "Running"} | more
+
+## View Services in Command Prompt
+
+
+### View Services
+```
+sc query
+```
+#C:\Users\student>sc query | more
+
+### View extended information for all services.
+```
+sc queryex type=service
+```
+#C:\Users\student>sc queryex type=service | more
+
+### View extended information for all inactive services.
+```
+sc queryex type=service state=inactive
+```
+#C:\Users\student>sc queryex type=service state=inactive | more
+
+### View all currently running services.
+```
+net start
+```
+#C:\Users\student>net start | more
+
+## How to view Scheduled tasks
+
+
+### View Scheduled Tasks In PowerShell
+
+
+### View all properties of the first scheduled task.
+```
+Get-ScheduledTask | Select * | select -First 1
+```
+#PS C:\Users\student> Get-ScheduledTask | Select * | select -First 1
+
+### View Scheduled Tasks In Command Prompt
+```
+schtasks /query /tn "IchBinBosh" /v /fo list
+```
+Autorun Registry Locations
+
+What are some Registry keys that can be used for autoruns?
+
+Registry Keys Locations, Locations connected with Services.
+
+HKLM\Software\Microsoft\Windows\CurrentVersion\Run - Local Machine
+
+HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce
+
+HKLM\System\CurrentControlSet\Services
+
+Remember that the Users have individual Hives with autoruns as well as the Current User.
+
+HKCU\Software\Microsoft\Windows\CurrentVersion\Run - Current User
+
+HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce
+
+HKU\<sid>\Software\Microsoft\Windows\CurrentVersion\Run - Specific User
+
+HKU\<sid>\Software\Microsoft\Windows\CurrentVersion\RunOnce
+
+The order in which services are loaded can be adjusted.
+
+HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\ServiceGroupOrder
+
+HKEY_LOCAL_MACHINE\CurrentControlSet\Control\GroupOrderList
+
+## View Network Connections In PowerShell
+
+
+### Show all Connections in the "Established" state.
+```
+Get-NetTCPConnection -State Established
+```
+#PS C:\Users\andy.dwyer> Get-NetTCPConnection -State Established
+
+### View Network Connections in Command Prompt
+### Show netstat help and point out the following:
+```
+netstat /?
+```
+-a   Displays all connections and listening ports
+-n   Displays addresses and port numbers in numerical form
+-o   Displays the owning process ID (PID) associated with each connection
+-b   Displays the executable involved in creating each connection (must have admin rights)
+
+## Displays all TCP/UDP connections with ports in numerical form with PID and executable associated to the connections
+```
+netstat -anob | more
+```
+#andy.dwyer@ADMIN-STATION C:\Users\andy.dwyer>netstat -anob | more
+
