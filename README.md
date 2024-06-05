@@ -751,6 +751,7 @@ Machine: Terra
 
 
 cat .bash_logout
+
 pwd
 
 garviel@terra:~$ cat .bash_logout
