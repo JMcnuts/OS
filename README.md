@@ -693,11 +693,15 @@ Task: Determine the means of persistence used by the program, and the port used.
 Flag format: command,persistence
 
 Machine: Terra
-
+```
 systemctl list-timers
+```
+```
 cat whatischaos.timer 
+```
+```
 cat whatischaos.service
-
+```
 # FIND EVIL 3
 
 Scenario: The web server has been modified by an unknown hacktivist group. Users accessing the web server are reporting crashes and insane disk usage.
@@ -709,9 +713,9 @@ Flag format: AttackMethod,command
 Machine: Terra
 
 Try not to break your machine on this one...
-
+```
 ps -elf |  grep apache3
-
+```
 
 
 Scenario: Someone or something is stealing files with a .txt extension from user directories. Determine how these thefts are occurring.
@@ -723,9 +727,9 @@ Flag format: command,how it occurs
 Machine: Terra
 
 Hint: Explore persistence mechanisms and services.
-
+```
 grep -Rnw / -e "*.txt" 2>/dev/null
-
+```
 garviel@terra:~$ cat /etc/systemd/system/graphical.target.wants/passwd.service #the way that it happens is my passwd.service
 Description=Secrets
 After=network.target auditd.service
