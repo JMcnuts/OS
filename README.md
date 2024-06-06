@@ -996,7 +996,7 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\bam\UserSettings #On 1803 a
 ```
 `Get-Item HKLM:\SYSTEM\CurrentControlSet\Services\bam\UserSettings\*
 ```
-Check event logs for a "flag" string.
+## Check event logs for a "flag" string.
 
 Machine: file-server
 
