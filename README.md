@@ -1005,9 +1005,23 @@ Get-Eventlog -LogName System | ft -wrap | findstr /i flag
 ```
 
 
+Find the file in the jump list location that might allow privilege escalation.
+
+'''
+cd C:\Users\student\AppData\Roaming\Microsoft\Windows\Recent\AutomaticDestinations
+```
+ Directory: C:\Users\student\AppData\Roaming\Microsoft\Windows\Recent\AutomaticDestinations                                  
 
 
+Mode                LastWriteTime         Length Name                                                                           
+----                -------------         ------ ----                                                                           
+-a----         6/6/2024   3:04 PM           4638 5f7b5f1e01b81337.automaticDestinations-ms                                      
+-a----        2/23/2022  10:01 PM           1536 5f7b5f1e01b83767.automaticDestinations-ms                                      
+-a----        2/23/2022   9:59 PM           7168 f01b4d95cf55d32a.automaticDestinations-ms
 
+```
+get-content '5f7b5f1e01b81337.automaticDestinations-ms'
+```
 
 
 
