@@ -674,10 +674,12 @@ Machine: Minas_Tirith
 
 
 htop to find the suspicious user receiving the chants
-
-cat /home/*/offering
-cat /home/*/chant
-
+```
+cat /home/ * /offering
+```
+```
+cat /home/ * /chant
+```
 
 
 # FIND EVIL 2
