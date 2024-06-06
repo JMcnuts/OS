@@ -872,18 +872,137 @@ To find executables (.exe files) and the dynamic link libraries (DLLs) associate
 dir C:\Windows\System32\*.exe C:\Windows\System32\*.dll /s /b
 ```
 
+There is a file that was recently opened that may contain PII.
+
+Get the flag from the contents of the file.
+
+Hint: We're not interested in numbers.
+```
+Get-Item 'Registry::\HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt'
+```
+Hive:                                                                                                                       
+    \HKEY_USERS\S-1-5-21-2881336348-3190591231-4063445930-1003\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs    
+
+
+Name                           Property                                                                                         
+----                           --------                                                                                         
+.txt                           6 : {67, 0, 58, 0...}                 #6 is the number 
+
+
+[System.Text.Encoding]::Unicode.GetString((gp "REGISTRY::HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt")."6")
+
+
+## Enter the name of the questionable file in the prefetch folder.
+```
+cd C:\Windows\Prefetch
+```
+
+## What is the creation time of the questionable file in the prefetch folder?
+
+```
+Get-ItemProperty -Path "C:\Windows\Prefetch" | Select-Object CreationTime
+```
+
+## Recover the flag from the Recycle Bin. Enter the name of the recycle bin file that contained the contents of the flag, and the contents of the deleted file. Include the file extension in your answer.
+
+*Hint: "Don't"
+
+Flag format: filename,contents
+
+```
+cd C:\$Recycle.bin
+```
+```
+Get-Childitem 'C:\$RECYCLE.BIN' -Recurse -Verbose -Force | select FullName
+```
+
+```
+
+gci C:\ -FIlter BAD_INTENTIONS.EXE-8F2806FC.pf -ErrorAction SilentlyContinue -Recurse | Select-Object CreationTIme
+```
 
 
 
 
+## Recover the flag from the Recycle Bin. Enter the name of the recycle bin file that contained the contents of the flag, and the contents of the deleted file. Include the file extension in your answer.
+
+*Hint: "Don't"
+
+Flag format: filename,contents
+
+
+
+```
+cd C:\$Recycle.Bin
+```
+```
+gci  -recurse -force 'C:\$Recycle.Bin' | select-string "DONT" 
+```
+
+
+
+## Enter the full path of the program that was run on this computer from an abnormal location.
+
+Keep in mind that:
+
+ 
+
+
+Operating System
 
 
 
 
+Windows 11
+
+Windows 11 (22H2) 10.0.22621
+
+Windows 11 (21H2) 10.0.22000
+
+
+Windows 10
+
+Windows 10 (22H2) 10.0.19045
+
+Windows 10 (21H2) 10.0.19044
+ 
+Windows 10 (21H1) 10.0.19043
+
+Windows 10 (20H2) 10.0.19042
+
+Windows 10 (2004) 10.0.1904
+
+Windows 10 (1909) 10.0.18363
+
+Windows 10 (1903) 10.0.18362
+
+Windows 10 (1809) 10.0.17763
+
+Windows 10 (1803) 10.0.17134
+
+Windows 10 (1709) 10.0.16299
+
+Windows 10 (1703) 10.0.15063
+
+Windows 10 (1607) 10.0.14393
 
 
 
 
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\bam\State\UserSettings #On 1809 and Newer
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\bam\UserSettings #On 1803 and below
+
+```
+`Get-Item HKLM:\SYSTEM\CurrentControlSet\Services\bam\UserSettings\*
+```
+Check event logs for a "flag" string.
+
+Machine: file-server
+
+```
+Get-Eventlog -LogName System | ft -wrap | findstr /i flag 
+```
 
 
 
