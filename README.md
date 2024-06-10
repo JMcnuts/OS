@@ -1183,6 +1183,8 @@ jq '.' /home/garviel/conn.log | grep id.orig_h  | sort -u | wc -l
 ```
 
 
+find ip addresess and open ports with portid
 
-
-
+```
+//*[@state='open']/../../../address/@addr | //*[@state='open']/../../port/@portid
+```
