@@ -10,6 +10,14 @@ credentials 5 student-password
 credentials 6 garviel-luna
 credentials 7 bombadil-jolly
 
+ssh -J student@10.50.26.35 garviel@10.17.0.4
+xfreerdp /u:student /v:10.50.26.35 -dynamic-resolution +glyph-cache +clipboard
+(Windows GUI), password-password
+
+
+
+
+
 ```
 # POWERSHELL
 ### Pwershell profiles are good to set persistence. Profiles are just scripts that have configurations set.
