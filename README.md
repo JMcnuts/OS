@@ -10,7 +10,7 @@ credentials 5 student-password
 credentials 6 garviel-luna
 credentials 7 bombadil-jolly
 
-ssh -J student@10.50.26.35 garviel@10.17.0.4
+ssh -J student@10.50.26.35 Andy.Dwyer@10.17.0.1
 xfreerdp /u:student /v:10.50.26.35 -dynamic-resolution +glyph-cache +clipboard
 (Windows GUI), password-password
 
