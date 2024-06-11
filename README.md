@@ -1196,3 +1196,24 @@ find ip addresess and open ports with portid
 ```
 //*[@state='open']/../../../address/@addr | //*[@state='open']/../../port/@portid
 ```
+
+Get-ADUser -Identity "Xavier.Ibarra" -Properties *
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
