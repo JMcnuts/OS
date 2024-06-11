@@ -1196,17 +1196,23 @@ find ip addresess and open ports with portid
 ```
 //*[@state='open']/../../../address/@addr | //*[@state='open']/../../port/@portid
 ```
-
+```
 Get-ADUser -Identity "Xavier.Ibarra" -Properties *
-
-
-
-
-
-
-
-
-
+```
+## Output members of the group Domain Admins
+```
+Get-ADGroupmember -identity "Domain Admins"
+```
+##Output information aboput group Domain Admins
+```
+Get-ADGroup -identity "Domain Admins"
+```
+```
+Get-ADUser -Filter * -Properties SamAccountname | findstr "Isiah" 
+```
+```
+Get-ADUser -Filter "physicalDeliveryOfficeName -eq 'users pa55w0rd: SchrodingersCat!!'" -Properties StreetAddress 
+```
 
 
 
