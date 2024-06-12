@@ -1261,8 +1261,53 @@ Unexpected Files and Directories:
 Look for unusual files, directories, or binaries that might be suspicious, particularly in common locations like /etc/, /usr/local/bin/, /usr/local/sbin/, and /var/.
 Remember to review each discovered item carefully to distinguish between legitimate system configurations and potential threats. Additionally, employing security tools like rkhunter, chkrootkit, or specialized threat hunting tools can help automate this process and identify any anomalies more efficiently.
 ```
+netstat -tuln
+ps aux
+top
+cut -d: -f1 /etc/passwd
+crontab -l
+ls /etc/cron.d/
+ls /etc/cron.daily/
+ls /etc/cron.hourly/
+ls /etc/cron.weekly/
+ls /etc/cron.monthly/
+cat /etc/crontab
+ls /etc/xdg/autostart/
+ls ~/.config/autostart/
+systemctl --user list-unit-files | grep ""
+
+Global Login Scripts:
+
+These scripts apply to all users and are typically located in system-wide configuration directories. Common examples include:
+
+/etc/profile: This script is sourced for all Bourne-compatible shells (e.g., Bash) upon login.
+/etc/profile.d/: This directory contains additional scripts that are sourced by /etc/profile.
+To view the contents of these scripts:
 
 
+cat /etc/profile
+ls /etc/profile.d/
+User-Specific Login Scripts:
+
+Each user can have their own login script that applies only when they log in. These scripts can be different for each shell.
+
+For Bash, the user's login script is typically ~/.bash_profile, ~/.bash_login, or ~/.profile. Bash will read them in that order, using the first one it finds.
+For other shells like Zsh, the user's login script may be ~/.zprofile or ~/.zlogin.
+To view the contents of these scripts for a specific user:
+
+
+cat ~/.bash_profile
+cat ~/.bash_login
+cat ~/.profile
+Session Initialization Scripts:
+
+Some desktop environments or window managers may have their own session initialization scripts that are executed when a user logs in graphically. These scripts are often used to set up the user's desktop environment, launch applications, or perform other tasks specific to the session.
+
+For example, in GNOME, session initialization scripts can be found in ~/.config/autostart/.
+To list the contents of these scripts:
+
+
+ls ~/.config/autostart/
 
 ```
 In Windows, persistence mechanisms can be established through various means. Here's how you can identify persistence methods:
