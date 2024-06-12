@@ -1015,7 +1015,7 @@ Get-Eventlog -LogName System | ft -wrap | findstr /i flag
 
 Find the file in the jump list location that might allow privilege escalation.
 
-'''
+```
 cd C:\Users\student\AppData\Roaming\Microsoft\Windows\Recent\AutomaticDestinations
 ```
  Directory: C:\Users\student\AppData\Roaming\Microsoft\Windows\Recent\AutomaticDestinations                                  
