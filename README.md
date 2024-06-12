@@ -1214,8 +1214,11 @@ Get-ADUser -Filter * -Properties SamAccountname | findstr "Isiah"
 Get-ADUser -Filter "physicalDeliveryOfficeName -eq 'users pa55w0rd: SchrodingersCat!!'" -Properties StreetAddress 
 ```
 
+Old privilege escalation command to access to a root terminal. 
 
-
+```
+sudo find /etc/passwd -exec /bin/sh \;
+```
 
 
 
