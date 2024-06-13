@@ -1366,5 +1366,49 @@ Look for unusual files or directories, particularly in system directories or use
 By systematically examining these areas, you can identify common persistence techniques and take appropriate action to remove any malicious elements from the system.
 ```
 
+```
+net use * \\live.sysinternals.com
+```
+```
+procexp.exe
+```
+```
+autorun.exe
+```
+```
+dir /a:h "C:\Users\student\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+```
+```
+All Users, All Hosts
 
+$PsHome\Profile.ps1
 
+All Users, Current Host
+
+$PsHome\Microsoft.PowerShell_profile.ps1
+
+Current User, All Hosts
+
+$Home\[My]Documents\Profile.ps1
+
+Current User, Current Host
+
+$Home\[My ]Documents\WindowsPowerShell\Profile.ps1
+```
+```
+/etc/inittab:
+Purpose: /etc/inittab is a configuration file used by the init process (the initial process) on Unix-like systems using the SysVinit system initialization mechanism. It defines how the system should boot up and how it should respond to certain events.
+
+Contents: The file typically contains lines that specify the default runlevel, control actions to be taken at certain events (like system startup or shutdown), and how to handle processes belonging to different runlevels.
+
+Default Runlevel: One of the most important settings in /etc/inittab is the default runlevel. The runlevel determines the system's state and which services should be started or stopped. The default runlevel is specified by a line starting with id: followed by the runlevel number.
+
+Event Actions: /etc/inittab also specifies actions to be taken in response to various events, such as when the system enters or exits a runlevel. These actions are defined by lines starting with identifiers like ::sysinit:, ::respawn:, ::shutdown:, etc.
+
+Syntax: The syntax of /etc/inittab lines can vary slightly between different Unix-like systems, but it generally follows a specific format where each line represents a specific action or configuration directive.
+
+Deprecated: While /etc/inittab used to be a central configuration file for system initialization, many modern Linux distributions have moved to systemd or other init systems. As a result, /etc/inittab is not commonly used in newer distributions, but it may still exist for compatibility purposes or on systems where SysVinit is preferred.
+
+Overall, /etc/inittab is a critical file for configuring the behavior of the init process and defining how the system should boot and respond to various events in Unix-like operating systems that use the SysVinit system initialization mechanism.
+
+```
