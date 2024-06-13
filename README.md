@@ -782,10 +782,24 @@ garviel@terra:~$ pwd
 /home/garviel #add /.bash_logout
 
 
+# FIND EVIL 2
+
+
+Scenario: Someone or something is stealing files with a .txt extension from user directories. Determine how these thefts are occurring.
+
+Task: Identify the command being ran and how it occurs.
+
+Flag format: command,how it occurs
+
+Machine: Terra
+
+Hint: Explore persistence mechanisms and services.
 
 
 
-
+```
+grep -Rnw / -e "*.txt" 2>/dev/null
+```
 
 
 
