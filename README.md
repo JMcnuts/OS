@@ -1275,6 +1275,7 @@ Unexpected Files and Directories:
 Look for unusual files, directories, or binaries that might be suspicious, particularly in common locations like /etc/, /usr/local/bin/, /usr/local/sbin/, and /var/.
 Remember to review each discovered item carefully to distinguish between legitimate system configurations and potential threats. Additionally, employing security tools like rkhunter, chkrootkit, or specialized threat hunting tools can help automate this process and identify any anomalies more efficiently.
 ```
+```
 netstat -tuln
 ps aux
 top
@@ -1322,7 +1323,7 @@ To list the contents of these scripts:
 
 
 ls ~/.config/autostart/
-
+```
 ```
 In Windows, persistence mechanisms can be established through various means. Here's how you can identify persistence methods:
 
