@@ -1368,7 +1368,7 @@ By systematically examining these areas, you can identify common persistence tec
 ```
 
 ```
-net use * \\live.sysinternals.com
+net use * \\live.sysinternals.com\tools
 ```
 ```
 procexp.exe
@@ -1413,3 +1413,97 @@ Deprecated: While /etc/inittab used to be a central configuration file for syste
 Overall, /etc/inittab is a critical file for configuring the behavior of the init process and defining how the system should boot and respond to various events in Unix-like operating systems that use the SysVinit system initialization mechanism.
 
 ```
+```
+Open Event Viewer:
+
+Press Win + R to open the Run dialog.
+Type eventvwr.msc and press Enter.
+Navigate Event Viewer:
+
+On the left pane, you'll see different categories such as Application, Security, Setup, System, etc.
+Click on any category to view corresponding logs.
+View Logs:
+
+Clicking on a category will display a list of logs in the center pane.
+You can click on any log to view its details, including date, time, event ID, and description.
+Filter Logs:
+
+You can filter logs by various criteria such as date, event level, event source, etc.
+Use the "Filter Current Log..." option in the Actions pane to apply filters.
+Export Logs:
+
+You can export logs for further analysis or sharing.
+Right-click on a log and select "Save All Events As..." to export logs to a file.
+Log File Locations:
+Application Logs: %SystemRoot%\System32\Winevt\Logs\Application.evtx
+Security Logs: %SystemRoot%\System32\Winevt\Logs\Security.evtx
+System Logs: %SystemRoot%\System32\Winevt\Logs\System.evtx
+Setup Logs: %SystemRoot%\System32\Winevt\Logs\Setup.evtx
+These files are in the Event Log format and can be opened using Event Viewer. However, accessing logs directly from Event Viewer provides a more organized and user-friendly interface.
+
+PowerShell:
+You can also use PowerShell commands to access logs. For example:
+
+Get-EventLog: Retrieves events from event logs on the local or remote computers.
+Get-WinEvent: Retrieves event information from event logs.
+These commands provide more flexibility for scripting and automation.
+
+Windows logs contain valuable information for diagnosing system issues, monitoring system health, and tracking system events.
+```
+```
+systemctl status:
+Purpose: systemctl is a command-line utility in Linux used to control and manage systemd services, including viewing their status, starting, stopping, enabling, or disabling them.
+
+Syntax: The systemctl status command is used to display detailed information about the status of a specific service or unit managed by systemd.
+
+Usage:
+
+To check the status of a service, you would typically use it like this: systemctl status [service_name].
+For example, to check the status of the SSH service, you would run: systemctl status sshd.
+Output: Running systemctl status provides information such as:
+
+Whether the service is active (running) or inactive (stopped).
+The current process ID (PID) of the service.
+Details of the service, including its description, loaded configuration file, and more.
+Logs and recent status changes.
+Options:
+
+-l or --full: Displays all available information about the service, including the full unit configuration.
+--no-pager: Prevents the output from being piped through a pager, displaying it all at once.
+--no-legend: Suppresses the header line, making the output shorter.
+--no-pager --no-legend can be useful when scripting or parsing the output of systemctl.
+Use Cases:
+
+Troubleshooting service-related issues.
+Verifying if a service is running as expected.
+Checking if recent changes to a service configuration have taken effect.
+Example:
+
+systemctl status sshd would display detailed information about the SSH service, including its current status, process ID, and recent log entries.
+systemctl status is a powerful tool for system administrators to manage and diagnose systemd services on Linux systems.
+```
+```
+To check all PowerShell profiles at once, you can run the following command in PowerShell:
+
+Get-ChildItem $PROFILE.AllUsersAllHosts, $PROFILE.AllUsersCurrentHost, $PROFILE.CurrentUserAllHosts, $PROFILE.CurrentUserCurrentHost -Force
+```
+```
+reg query HKEY_LOCAL_MACHINE /s
+reg query HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+reg query HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce
+reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services
+reg query HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
+```
+```
+netstat -ano (Windows)
+find / -name "password" 2>/dev/null(Linux)
+netstat -tuln (Linux)
+htop
+```
+
+10.50.40.82 (Linux)
+10.50.24.67(Windows)
+U:student p:password
+
+reg query HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
+3S3tupMalw4re.exe
