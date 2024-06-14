@@ -1505,5 +1505,11 @@ htop
 10.50.24.67(Windows)
 U:student p:password
 
+1: 56789
+
+2:1nstallM4lwar3.exe
+
+
+3:
 reg query HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
-3S3tupMalw4re.exe
+S3tupMalw4re.exe
