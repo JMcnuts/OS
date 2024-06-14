@@ -1505,5 +1505,5 @@ htop
 10.50.24.67(Windows)
 U:student p:password
 
-aut0mate_3vil
+
 
