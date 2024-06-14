@@ -1506,4 +1506,6 @@ htop
 U:student p:password
 
 
+/usr/sbin/CRON -f
+/bin/sh -c /tmp/lucky_scr1pt.sh
 
